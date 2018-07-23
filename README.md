@@ -4,4 +4,4 @@
 ## Contributors
 * [speedxcc](https://github.com/speedxcc)
 
-* [fywest](https://github.com/fywest/)
+* [无用阶级](https://github.com/fywest/)
