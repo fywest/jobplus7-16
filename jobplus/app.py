@@ -1,12 +1,12 @@
 from flask import Flask, render_template
 from jobplus.config import configs
 from jobplus.models import db, User, Resume, Company, Job
-from flask import Buleprint
+from flask import Blueprint
 
 def create_app(config):
 
 	app = Flask(__name__)
-	app.config.from_objecet(configs.get(config))
+	app.config.from_object(configs.get(config))
 	db.init_app(app)
 	register_blueprint(app)
 	return app
