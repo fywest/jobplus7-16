@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, current_app, request
-from jobplus.models import Job
+from jobplus.models import Job,db,User
 
 job = Blueprint('job', __name__, url_prefix='/job')
 
@@ -18,4 +18,7 @@ def index():
 @job.route('/<int:job_id>')
 def detail(job_id):
 	job = Job.query.get_or_404(job_id)
-	return render_template('job/detail.html',job=job)
+	newest_companies_jobs = Job.query.filter(
+        Job.id==job.company.detail.id
+    ).limit(3)
+	return render_template('job/detail.html',job=job,newest_companies_jobs=newest_companies_jobs)
