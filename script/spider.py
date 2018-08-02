@@ -64,8 +64,8 @@ class FakerData(object):
                 db.session.rollback()
                 continue
             d = CompanyDetail(
-                #logo='https://static.lagou.com/thumbnail_160x160/' + company['companyLogo'],
-                logo=company['companyLogo'],
+                logo='https://static.lagou.com/thumbnail_160x160/' + company['companyLogo'],
+                #logo=company['companyLogo'],
                 site='https://shiyanlou.com',
                 location=company['city'],
                 field=company['industryField'],

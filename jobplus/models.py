@@ -50,6 +50,8 @@ class User(Base, UserMixin):
     # 企业用户详情
     detail = db.relationship('CompanyDetail', uselist=False)
 
+    is_disable = db.Column(db.Boolean, default=False)
+
     def __repr__(self):
         return '<User:{}>'.format(self.name)
 
@@ -139,7 +141,7 @@ class CompanyDetail(Base):
     __tablename__ = 'company_detail'
 
     id = db.Column(db.Integer, primary_key=True)
-    logo = db.Column(db.String(2256), nullable=False)
+    logo = db.Column(db.String(256), nullable=False)
     site = db.Column(db.String(128), nullable=False)
     location = db.Column(db.String(24), nullable=False)
     # 一句话描述
@@ -195,6 +197,7 @@ class Job(Base):
     def url(self):
         return url_for('job.detail',job_id=self.id)
 
+
 class Dilivery(Base):
     __tablename__ = 'delivery'
 
@@ -211,5 +214,3 @@ class Dilivery(Base):
     status = db.Column(db.SmallInteger, default=STATUS_WAITING)
     # 企业回应
     response = db.Column(db.String(256))
-
-
