@@ -1,0 +1,9 @@
+sudo pip3 install flask flask-sqlalchemy mysqlclient flask-migrate flask-wtf flask-login faker
+
+sudo service mysql start
+
+flask db init
+flask db migrate -m 'init'
+flask db upgrade
+
+mysql -uroot

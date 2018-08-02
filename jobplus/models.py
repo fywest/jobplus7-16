@@ -2,7 +2,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask import url_for
 
 db = SQLAlchemy()
 
@@ -193,6 +193,9 @@ class Job(Base):
     @property
     def tag_list(self):
         return self.tags.split(',')
+    @property
+    def url(self):
+        return url_for('job.detail',job_id=self.id)
 
 
 class Dilivery(Base):
@@ -211,5 +214,3 @@ class Dilivery(Base):
     status = db.Column(db.SmallInteger, default=STATUS_WAITING)
     # 企业回应
     response = db.Column(db.String(256))
-
-
