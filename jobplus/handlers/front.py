@@ -1,3 +1,4 @@
+# -*- coding:utf8 -*-
 from flask import Blueprint, render_template, redirect, url_for, flash
 from jobplus.models import User, db, Job
 from jobplus.forms import RegisterForm, LoginForm
@@ -8,7 +9,7 @@ front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
-    newest_jobs = Job.query.order_by(Job.created_at.desc()).limit(9)
+    newest_jobs = Job.query.filter(Job.is_disable.is_(False)).order_by(Job.created_at.desc()).limit(9)
     newest_companies = User.query.filter(
         User.role==User.ROLE_COMPANY
     ).order_by(User.created_at.desc()).limit(8)

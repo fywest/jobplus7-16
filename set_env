@@ -7,3 +7,12 @@ flask db migrate -m 'init'
 flask db upgrade
 
 mysql -uroot
+
+create database jobplus
+use jobplus
+
+source /home/shiyanlou/jobplus7-16/jobplus.sql
+
+export FLASK_APP=manage.py
+export FLASK_DEBUG=1
+flask run

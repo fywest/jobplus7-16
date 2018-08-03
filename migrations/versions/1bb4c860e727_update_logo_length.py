@@ -1,8 +1,8 @@
-"""init database
+"""update logo length
 
-Revision ID: 3e45f4e058a2
+Revision ID: 1bb4c860e727
 Revises: 
-Create Date: 2018-07-26 23:11:38.287633
+Create Date: 2018-07-29 22:30:55.862239
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3e45f4e058a2'
+revision = '1bb4c860e727'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,9 +38,8 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('slug', sa.String(length=24), nullable=False),
-    sa.Column('logo', sa.String(length=64), nullable=False),
-    sa.Column('site', sa.String(length=64), nullable=False),
+    sa.Column('logo', sa.String(length=256), nullable=False),
+    sa.Column('site', sa.String(length=128), nullable=False),
     sa.Column('location', sa.String(length=24), nullable=False),
     sa.Column('description', sa.String(length=100), nullable=True),
     sa.Column('about', sa.String(length=1024), nullable=True),
@@ -48,11 +47,12 @@ def upgrade():
     sa.Column('stack', sa.String(length=128), nullable=True),
     sa.Column('team_introduction', sa.String(length=256), nullable=True),
     sa.Column('welfares', sa.String(length=256), nullable=True),
+    sa.Column('field', sa.String(length=128), nullable=True),
+    sa.Column('finance_stage', sa.String(length=128), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_company_detail_slug'), 'company_detail', ['slug'], unique=True)
     op.create_table('job',
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -150,7 +150,6 @@ def downgrade():
     op.drop_table('delivery')
     op.drop_table('resume')
     op.drop_table('job')
-    op.drop_index(op.f('ix_company_detail_slug'), table_name='company_detail')
     op.drop_table('company_detail')
     op.drop_index(op.f('ix_user_name'), table_name='user')
     op.drop_index(op.f('ix_user_email'), table_name='user')
